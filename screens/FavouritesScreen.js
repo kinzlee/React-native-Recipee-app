@@ -1,17 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-
-const CategoriesMealScreen = () => {
+const FavouritesScreen = () => {
     <View style={styles.screen}>
-        <Text>categogries  Meals screen </Text>
+        <Text> Favourite Screen </Text>
     </View>
 };
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1
+        flex: 1,
+        textAlign: 'center',
+        justifyContent: 'center'
     }
 });
 
-export default CategoriesMealScreen;
+export default FavouritesScreen
