@@ -1,16 +1,21 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 
 
-const CategoriesMealScreen = () => {
+const CategoriesMealScreen = ({navigation}) => {
+    return (
     <View style={styles.screen}>
         <Text>categogries  Meals screen </Text>
+        <Button title="Go To Details" onPress={() => navigation.navigate('mealsDetail')} />
     </View>
+    );
 };
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
