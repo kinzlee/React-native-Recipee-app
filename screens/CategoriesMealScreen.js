@@ -7,6 +7,7 @@ const CategoriesMealScreen = ({navigation}) => {
     <View style={styles.screen}>
         <Text>categogries  Meals screen </Text>
         <Button title="Go To Details" onPress={() => navigation.navigate('mealsDetail')} />
+        <Button title="Go Back" onPress={() => navigation.goBack()} />
     </View>
     );
 };
