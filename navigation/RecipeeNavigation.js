@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 import CategoriesScreen from '../screens/CategoriesScreen';
@@ -9,22 +10,20 @@ import {CATEGORIES} from '../data/dummy-data';
 
 
 const Stack = createStackNavigator();
-
 MyStack = () => {
-
-    const styleHeading
     return (
         <NavigationContainer>
-        <Stack.Navigator>
-            ScreenOptions={{
-                headerStyle: {
-                    backgroundColor: Platform.OS === 'android' ? Colors.primartyColor : ''
-                },
-                headerTintColor: Platform.OS === 'android' ? '#ffff' : Colors.primartyColor,
-                headerTitleStyle: {
-                    fontWeight: 'bold'
-                },
-            }}
+        <Stack.Navigator
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: Platform.OS === 'android' ? Colors.primartyColor : ''
+            },
+            headerTintColor: Platform.OS === 'android' ? '#ffff' : Colors.primartyColor,
+            headerTitleStyle: {
+                fontWeight: 'bold'
+            },
+        }}
+        >
             <Stack.Screen name="categories" 
             component={CategoriesScreen} 
             options = {{
