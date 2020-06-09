@@ -11,13 +11,12 @@ import {CATEGORIES} from '../data/dummy-data';
 const Stack = createStackNavigator();
 
 MyStack = () => {
+
+    const styleHeading
     return (
         <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen name="categories" 
-            component={CategoriesScreen} 
-            options = {{
-                title: 'Meal Category',
+            ScreenOptions={{
                 headerStyle: {
                     backgroundColor: Platform.OS === 'android' ? Colors.primartyColor : ''
                 },
@@ -25,6 +24,11 @@ MyStack = () => {
                 headerTitleStyle: {
                     fontWeight: 'bold'
                 },
+            }}
+            <Stack.Screen name="categories" 
+            component={CategoriesScreen} 
+            options = {{
+                title: 'Meal Category'
             }}
             />
             <Stack.Screen name="categoriesMeal"
