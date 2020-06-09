@@ -15,6 +15,7 @@ export const CATEGORIES = [
     new Category('c1', 'Colombian', '#f5428d'),
     new Category('c1', 'Mexican', '#f5428d'),
     new Category('c1', 'Jamaican', '#f5428d'),
+    new Category('c1', 'American', '#f5428d'),
     new Category('c1', 'Lybarian', '#f5428d')
 
 ];

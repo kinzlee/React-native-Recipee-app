@@ -28,13 +28,7 @@ const CategoriesScreen = ({navigation}) => {
     );
 };
 
-CategoriesScreen.navigationOptions = {
-    headerTitle: 'Meal Category',
-    headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? Colors.primartyColor : ''
-    },
-    headerTintColor: Platform.OS === 'android' ? '#ffff' : Colors.primartyColor
-}
+    
 
 const styles = StyleSheet.create({
     screen: {
@@ -44,7 +38,7 @@ const styles = StyleSheet.create({
     },
     gridItem: {
         flex: 1,
-        margin: 15,
+        margin: 15, 
         height: 150
     }
 });
