@@ -6,6 +6,7 @@ class Meal {
           affordability, 
           complexity, 
           imageUrl,
+          duration,
           ingredients,
           steps,
           isGlutenFree,
@@ -13,13 +14,14 @@ class Meal {
           isVegetarian,
           isLactoseFree 
         ) {
-            this.is = id,
+            this.id = id,
             this.categoryIds = categoryIds,
             this.title = title,
-            thiss.affordability = affordability,
+            this.affordability = affordability,
             this.complexity = complexity,
             this.imageUrl = imageUrl,
-            ingredients = ingredients,
+            this.duration = duration,
+            this.ingredients = ingredients,
             this.steps = steps,
             this.isGlutenFree = isGlutenFree,
             this.isVegan = isVegan,
@@ -27,3 +29,4 @@ class Meal {
             this.isLactoseFree = isLactoseFree
     }
 }
+export default Meal;
