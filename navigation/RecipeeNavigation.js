@@ -3,6 +3,7 @@ import {Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Ionicons} from '@expo/vector-icons'
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoriesMealScreen from '../screens/CategoriesMealScreen';
 import MealsDetailScreen from '../screens/MealsDetailScreen';
@@ -66,7 +67,6 @@ const MyStack = () => {
             />
         </Stack.Navigator>
         </NavigationContainer>
-
     );
 };
 
@@ -74,7 +74,18 @@ const Tab = createBottomTabNavigator();
 
 MyTabs = () => {
     return (
-        <Tab.Navigator>
+    
+        <Tab.Navigator
+         screenOptions={({route}) => ({
+            TabBarIcon: () => {
+                if(route.name = 'meals') {
+                const iconName = 'ios-restaurant';
+                
+                return<Ionicons  name ={iconName} size={24} color={Colors.secondaryColor} />
+                }
+            },
+        })}
+        >
             <Tab.Screen name="meals" component={CategoriesScreen} />
             <Tab.Screen name="favourites" component={FavouritesScreen} />
         </Tab.Navigator>
