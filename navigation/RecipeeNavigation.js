@@ -49,7 +49,7 @@ MyStack = () => {
                 const selectedMeal = MEALS.find(meal => meal.id === mealId);
                 return {
                     title: selectedMeal.title,
-                    headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                    headerRight:() => ( <HeaderButtons HeaderButtonComponent={HeaderButton}>
                         <Item 
                         title="Favourite"
                         iconName="ios-star"
@@ -58,6 +58,7 @@ MyStack = () => {
                         }}
                         />
                     </HeaderButtons>
+                    ),
                 }
             }}
             />
