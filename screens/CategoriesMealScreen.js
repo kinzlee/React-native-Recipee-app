@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button, FlatList} from 'react-native';
 import {CATEGORIES, MEALS} from '../data/dummy-data';
-import MealItem from '../models/MealItem';
+import MealItem from '../components/MealItem';
 
 
 const CategoriesMealScreen = ({route, navigation}) => {

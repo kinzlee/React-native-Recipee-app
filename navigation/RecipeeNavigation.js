@@ -7,6 +7,8 @@ import CategoriesMealScreen from '../screens/CategoriesMealScreen';
 import MealsDetailScreen from '../screens/MealsDetailScreen';
 import Colors from '../constants/Colors';
 import {CATEGORIES, MEALS} from '../data/dummy-data';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../components/HeaderButton';
 
 
 const Stack = createStackNavigator();
@@ -46,7 +48,16 @@ MyStack = () => {
                 const {mealId} = route.params;
                 const selectedMeal = MEALS.find(meal => meal.id === mealId);
                 return {
-                    title: selectedMeal.title
+                    title: selectedMeal.title,
+                    headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                        <Item 
+                        title="Favourite"
+                        iconName="ios-star"
+                        onPress={() => {
+                            console.log('this works correctly')
+                        }}
+                        />
+                    </HeaderButtons>
                 }
             }}
             />

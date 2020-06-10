@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ccc',
         overflow: 'hidden',
         borderRadius: 10,
+        marginVertical: 10
         // elevation: 6
         
     },
