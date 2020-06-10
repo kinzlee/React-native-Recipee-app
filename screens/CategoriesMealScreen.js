@@ -9,9 +9,9 @@ const CategoriesMealScreen = ({route, navigation}) => {
         return (
             <MealItem title={itemData.item.title} 
             onSelectMeal={() => {
-                navigation.navigate('mealsDetail',
-                
-                )
+                navigation.navigate('mealsDetail', {
+                    mealId: itemData.item.id
+                });
             }}
             duration={itemData.item.duration}
             affordability={itemData.item.affordability}
@@ -28,7 +28,7 @@ const CategoriesMealScreen = ({route, navigation}) => {
         <FlatList 
         data={selectedMeals} 
         renderItem={renderMealItem}
-        style={{width: '100%', padding:10}}
+        style={{width: '100%', paddingHorizontal:10}}
         /> 
     </View>
     );

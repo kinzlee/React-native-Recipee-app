@@ -6,7 +6,7 @@ import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoriesMealScreen from '../screens/CategoriesMealScreen';
 import MealsDetailScreen from '../screens/MealsDetailScreen';
 import Colors from '../constants/Colors';
-import {CATEGORIES} from '../data/dummy-data';
+import {CATEGORIES, MEALS} from '../data/dummy-data';
 
 
 const Stack = createStackNavigator();
@@ -40,7 +40,16 @@ MyStack = () => {
                 }
              }}
              />
-            <Stack.Screen name="mealsDetail" component={MealsDetailScreen} />
+            <Stack.Screen name="mealsDetail" 
+            component={MealsDetailScreen}
+            options={({route}) => {
+                const {mealId} = route.params;
+                const selectedMeal = MEALS.find(meal => meal.id === mealId);
+                return {
+                    title: selectedMeal.title
+                }
+            }}
+            />
         </Stack.Navigator>
         </NavigationContainer>
     );
