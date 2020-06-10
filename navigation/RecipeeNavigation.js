@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack'
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoriesMealScreen from '../screens/CategoriesMealScreen';
 import MealsDetailScreen from '../screens/MealsDetailScreen';
@@ -9,10 +10,11 @@ import Colors from '../constants/Colors';
 import {CATEGORIES, MEALS} from '../data/dummy-data';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
+import FavouritesScreen from '../screens/FavouritesScreen';
 
 
 const Stack = createStackNavigator();
-MyStack = () => {
+const MyStack = () => {
     return (
         <NavigationContainer>
         <Stack.Navigator
@@ -27,7 +29,7 @@ MyStack = () => {
         }}
         >
             <Stack.Screen name="categories" 
-            component={CategoriesScreen} 
+            component={MyTabs} 
             options = {{
                 title: 'Meal Category'
             }}
@@ -64,11 +66,23 @@ MyStack = () => {
             />
         </Stack.Navigator>
         </NavigationContainer>
+
     );
 };
 
-export default MyStack
+const Tab = createBottomTabNavigator();
 
+MyTabs = () => {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="meals" component={CategoriesScreen} />
+            <Tab.Screen name="favourites" component={FavouritesScreen} />
+        </Tab.Navigator>
+    );
+}
+
+
+export default MyStack
 
 
 
