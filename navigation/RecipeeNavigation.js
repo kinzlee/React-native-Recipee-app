@@ -79,6 +79,7 @@ MyTabs = () => {
     return (
     
         <Tab.Navigator
+        shifting ={true}
         initialRouteName="meals"
         activeColor="#fff"
         inactiveColor="grey"
@@ -107,7 +108,11 @@ MyTabs = () => {
         >
             <Tab.Screen name="meals" component={CategoriesScreen} />
             <Tab.Screen name="favourites" component={FavouritesScreen}
-            tabBarOptions={{ barStyle={ backgroundColor : Colors.secondaryColor }}}
+            options={{
+                title : 'favourites',
+                tabBarIcon: ({color}) => <Ionicons size={24} color={color} name='ios-star' />,
+                tabBarColor: Colors.secondaryColor,
+            }}
             />
         </Tab.Navigator>
     );
