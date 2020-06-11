@@ -75,17 +75,20 @@ const MyStack = () => {
 const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 
 
-
-
 MyTabs = () => {
     return (
     
         <Tab.Navigator
+        initialRouteName="meals"
+        activeColor="#fff"
+        inactiveColor="grey"
+        barStyle={{ backgroundColor : Colors.primartyColor }}
+
          screenOptions={({route}) => ({
             tabBarIcon: ({focused, size}) => {
                 let iconName;
                 let color
-                const activeTintColor = Colors.secondaryColor;
+                const activeTintColor = '#fff';
                 const inactiveTintColor = 'grey'
                 if(route.name === 'meals') {
                 iconName = focused ? 'ios-restaurant' : 'ios-restaurant';
@@ -98,16 +101,14 @@ MyTabs = () => {
                 color = focused ? activeTintColor  : inactiveTintColor;
                 }
 
-                return<Ionicons  name ={iconName} size={size} color={color} />;
+                return<Ionicons  name ={iconName} size={size} color={color}/>;
             },
         })}
-        taBarOptions={{
-            activeTintColor: Colors.secondaryColor,
-            inactiveTintColor: 'grey'
-        }}
         >
             <Tab.Screen name="meals" component={CategoriesScreen} />
-            <Tab.Screen name="favourites" component={FavouritesScreen} />
+            <Tab.Screen name="favourites" component={FavouritesScreen}
+            tabBarOptions={{ barStyle={ backgroundColor : Colors.secondaryColor }}}
+            />
         </Tab.Navigator>
     );
 }
