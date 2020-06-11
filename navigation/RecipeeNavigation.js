@@ -106,8 +106,16 @@ MyTabs = () => {
             },
         })}
         >
-            <Tab.Screen name="meals" component={CategoriesScreen} />
-            <Tab.Screen name="favourites" component={FavouritesScreen}
+            <Tab.Screen name="meals" 
+            component={CategoriesScreen} 
+            options={{
+                title : 'meals',
+                tabBarIcon: ({color}) => <Ionicons size={24} color={color} name='ios-restaurant' />,
+                tabBarColor: Colors.primartyColor,
+            }}
+            />
+            <Tab.Screen name="favourites"
+             component={FavouritesScreen}
             options={{
                 title : 'favourites',
                 tabBarIcon: ({color}) => <Ionicons size={24} color={color} name='ios-star' />,
