@@ -15,21 +15,22 @@ import FavouritesScreen from '../screens/FavouritesScreen';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import { grey } from 'color-name';
 
+const defaultNavigationOption = {
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.primartyColor : ''
+    },
+    headerTintColor: Platform.OS === 'android' ? '#ffff' : Colors.primartyColor,
+    headerTitleStyle: {
+        fontWeight: 'bold'
+    }
+}
 
 const Stack = createStackNavigator();
 const MyStack = () => {
     return (
         <NavigationContainer>
         <Stack.Navigator
-        screenOptions={{
-            headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? Colors.primartyColor : ''
-            },
-            headerTintColor: Platform.OS === 'android' ? '#ffff' : Colors.primartyColor,
-            headerTitleStyle: {
-                fontWeight: 'bold'
-            },
-        }}
+        screenOptions={defaultNavigationOption}
         >
             <Stack.Screen name="categories" 
             component={MyTabs} 
@@ -71,6 +72,15 @@ const MyStack = () => {
         </NavigationContainer>
     );
 };
+
+const Fav = createStackNavigator();
+FavNavigator = () => {
+    return(
+        <NavigationContainer>
+            <Fav.Navigator></Fav.Navigator>
+        </NavigationContainer>
+    );
+}
 
 const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 
@@ -116,7 +126,7 @@ MyTabs = () => {
             />
             <Tab.Screen name="favourites"
              component={FavouritesScreen}
-            options={{
+             options={{
                 title : 'favourites',
                 tabBarIcon: ({color}) => <Ionicons size={24} color={color} name='ios-star' />,
                 tabBarColor: Colors.secondaryColor,

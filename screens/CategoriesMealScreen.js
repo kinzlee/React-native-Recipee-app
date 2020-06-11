@@ -15,7 +15,7 @@ const CategoriesMealScreen = ({route, navigation}) => {
             }}
             duration={itemData.item.duration}
             affordability={itemData.item.affordability}
-            complexity={itemData.item.complexity}
+            complexity={itemData.item.complexity.toUpperCase()}
             image={itemData.item.imageUrl}
             />
         );
