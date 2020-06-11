@@ -12,6 +12,8 @@ import {CATEGORIES, MEALS} from '../data/dummy-data';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import FavouritesScreen from '../screens/FavouritesScreen';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import { grey } from 'color-name';
 
 
 const Stack = createStackNavigator();
@@ -70,21 +72,39 @@ const MyStack = () => {
     );
 };
 
-const Tab = createBottomTabNavigator();
+const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
+
+
+
 
 MyTabs = () => {
     return (
     
         <Tab.Navigator
          screenOptions={({route}) => ({
-            TabBarIcon: () => {
-                if(route.name = 'meals') {
-                const iconName = 'ios-restaurant';
-                
-                return<Ionicons  name ={iconName} size={24} color={Colors.secondaryColor} />
+            tabBarIcon: ({focused, size}) => {
+                let iconName;
+                let color
+                const activeTintColor = Colors.secondaryColor;
+                const inactiveTintColor = 'grey'
+                if(route.name === 'meals') {
+                iconName = focused ? 'ios-restaurant' : 'ios-restaurant';
+                size = 24;
+                color = focused ? activeTintColor: inactiveTintColor;
+
+                } else if(route.name === "favourites") { 
+                    iconName = focused ? 'ios-star' : 'ios-star';
+                    size = 24;
+                color = focused ? activeTintColor  : inactiveTintColor;
                 }
+
+                return<Ionicons  name ={iconName} size={size} color={color} />;
             },
         })}
+        taBarOptions={{
+            activeTintColor: Colors.secondaryColor,
+            inactiveTintColor: 'grey'
+        }}
         >
             <Tab.Screen name="meals" component={CategoriesScreen} />
             <Tab.Screen name="favourites" component={FavouritesScreen} />
