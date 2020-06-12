@@ -48,7 +48,7 @@ const FavStack = () => {
       <Stack.Screen
         name="mealsDetail"
         component={MealsDetailScreen}
-        options={{ title: "Meals Detail" }}
+        // options={title="Meals Detail"}
       />
     </Stack.Navigator>
   );
@@ -61,7 +61,6 @@ const MyStack = () => {
         name={"meals"}
         component={CategoriesScreen}
         options={{
-          // headerShown: false,
           title: "Categories"
         }}
       />
