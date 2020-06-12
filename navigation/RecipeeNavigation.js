@@ -12,8 +12,11 @@ import { CATEGORIES, MEALS } from "../data/dummy-data";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import FavouritesScreen from "../screens/FavouritesScreen";
+import FiltersScreen from "../screens/FiltersScreen";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { grey } from "color-name";
+// import MyTabs from "./RecipeeBottomNavigation";
 
 const defaultNavigationOption = {
   headerStyle: {
@@ -23,10 +26,6 @@ const defaultNavigationOption = {
   headerTitleStyle: {
     fontWeight: "bold"
   }
-};
-
-const headerON = ({ route }) => {
-  return route.options.title === "favourites" ? true : "false";
 };
 
 const Tab =
@@ -65,7 +64,7 @@ MyTabs = () => {
       >
         <Tab.Screen
           name="meals"
-          component={MyStack}
+          component={MyDrawer}
           options={{
             headerMode: "screen",
             title: "meals",
@@ -129,8 +128,21 @@ const MyStack = () => {
       <Stack.Screen
         name={"meals"}
         component={CategoriesScreen}
-        options={{
-          title: "Categories"
+        options={({ navigation }) => {
+          return {
+            title: "Meal Categories",
+            headerLeft: (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title="menu"
+                  iconName="ios-menu"
+                  onPress={() => {
+                    navigation.toggleDrawer();
+                  }}
+                />
+              </HeaderButtons>
+            )
+          };
         }}
       />
       <Stack.Screen
@@ -170,6 +182,31 @@ const MyStack = () => {
         }}
       />
     </Stack.Navigator>
+  );
+};
+
+const FiltersNav = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="filters"
+        component={FiltersScreen}
+        options={{
+          title: "Filters"
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const Drawer = createDrawerNavigator();
+
+const MyDrawer = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="MainStck" component={MyStack} />
+      <Drawer.Screen name="filters" component={FiltersNav} />
+    </Drawer.Navigator>
   );
 };
 
