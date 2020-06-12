@@ -29,87 +29,12 @@ const headerON = ({ route }) => {
   return route.options.title === "favourites" ? true : "false";
 };
 
-const Stack = createStackNavigator();
-
-const FavStack = () => {
-  return (
-    <Stack.Navigator
-      // headerMode="none"/
-      screenOptions={defaultNavigationOption}
-    >
-      <Stack.Screen
-        name="favourites"
-        component={FavouritesScreen}
-        options={{
-          title: "favourites"
-        }}
-        // options={}
-      />
-      <Stack.Screen
-        name="mealsDetail"
-        component={MealsDetailScreen}
-        // options={title="Meals Detail"}
-      />
-    </Stack.Navigator>
-  );
-};
-
-const MyStack = () => {
-  return (
-    <Stack.Navigator screenOptions={defaultNavigationOption}>
-      <Stack.Screen
-        name={"meals"}
-        component={CategoriesScreen}
-        options={{
-          title: "Categories"
-        }}
-      />
-      <Stack.Screen
-        name="categoriesMeal"
-        component={CategoriesMealScreen}
-        options={({ route }) => {
-          const { categoryId } = route.params;
-          const selectedCategory = CATEGORIES.find(
-            catgry => catgry.id === categoryId
-          );
-
-          return {
-            title: selectedCategory.title
-          };
-        }}
-      />
-      <Stack.Screen
-        name="mealsDetail"
-        component={MealsDetailScreen}
-        options={({ route }) => {
-          const { mealId } = route.params;
-          const selectedMeal = MEALS.find(meal => meal.id === mealId);
-          return {
-            title: selectedMeal.title,
-            headerRight: () => (
-              <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item
-                  title="Favourite"
-                  iconName="ios-star"
-                  onPress={() => {
-                    console.log("this works correctly");
-                  }}
-                />
-              </HeaderButtons>
-            )
-          };
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
-
 const Tab =
   Platform.OS === "android"
     ? createMaterialBottomTabNavigator()
     : createBottomTabNavigator();
 
-const MyTabs = () => {
+MyTabs = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -164,6 +89,87 @@ const MyTabs = () => {
         />
       </Tab.Navigator>
     </NavigationContainer>
+  );
+};
+
+const Stack = createStackNavigator();
+
+const FavStack = () => {
+  return (
+    <Stack.Navigator
+      // headerMode="none"/
+      screenOptions={defaultNavigationOption}
+    >
+      <Stack.Screen
+        name="favourites"
+        component={FavouritesScreen}
+        options={{
+          title: "favourites"
+        }}
+        // options={}
+      />
+      <Stack.Screen
+        name="mealsDetail"
+        component={MealsDetailScreen}
+        options={({ route }) => {
+          const { mealId } = route.params;
+          const selectedMeal = MEALS.find(meal => meal.id === mealId);
+          return {
+            title: selectedMeal.title
+          };
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const MyStack = () => {
+  return (
+    <Stack.Navigator screenOptions={defaultNavigationOption}>
+      <Stack.Screen
+        name={"meals"}
+        component={CategoriesScreen}
+        options={{
+          title: "Categories"
+        }}
+      />
+      <Stack.Screen
+        name="categoriesMeal"
+        component={CategoriesMealScreen}
+        options={({ route }) => {
+          const { categoryId } = route.params;
+          const selectedCategory = CATEGORIES.find(
+            catgry => catgry.id === categoryId
+          );
+
+          return {
+            title: selectedCategory.title
+          };
+        }}
+      />
+      <Stack.Screen
+        name="mealsDetail"
+        component={MealsDetailScreen}
+        options={({ route }) => {
+          const { mealId } = route.params;
+          const selectedMeal = MEALS.find(meal => meal.id === mealId);
+          return {
+            title: selectedMeal.title,
+            headerRight: () => (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title="Favourite"
+                  iconName="ios-star"
+                  onPress={() => {
+                    console.log("this works correctly");
+                  }}
+                />
+              </HeaderButtons>
+            )
+          };
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 
