@@ -26,19 +26,28 @@ const defaultNavigationOption = {
 }
 
 const Stack = createStackNavigator();
+
+const CategoriesStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen />
+        </Stack.Navigator>
+    )
+}
+
 const MyStack = () => {
     return (
         <NavigationContainer>
         <Stack.Navigator
+            headerMode="none"
         screenOptions={defaultNavigationOption}
         >
-            <Stack.Screen name="categories" 
+            <Stack.Screen 
+            name="meals"
             component={MyTabs} 
-            options = {{
-                title: 'Meal Category'
-            }}
             />
             <Stack.Screen name="categoriesMeal"
+            he
              component={CategoriesMealScreen} 
              options={({route}) => {
                 const {categoryId} = route.params;
@@ -73,12 +82,24 @@ const MyStack = () => {
     );
 };
 
-const Fav = createStackNavigator();
-FavNavigator = () => {
-    return(
-        <NavigationContainer>
-            <Fav.Navigator></Fav.Navigator>
-        </NavigationContainer>
+
+const FavStack = () => {
+    return (
+            <Stack.Navigator
+            // headerMode="none"/
+            screenOptions={defaultNavigationOption}            
+            >
+                <Stack.Screen 
+                name="favouritesss"
+                component={FavouritesScreen}
+                // options={title="favourites"}
+                />
+                <Stack.Screen 
+                name="mealsDetail"
+                component={MealsDetailScreen}
+                // options={title="Meals Detail"}
+                />
+            </Stack.Navigator>
     );
 }
 
@@ -89,6 +110,7 @@ MyTabs = () => {
     return (
     
         <Tab.Navigator
+
         shifting ={true}
         initialRouteName="meals"
         activeColor="#fff"
@@ -115,18 +137,21 @@ MyTabs = () => {
                 return<Ionicons  name ={iconName} size={size} color={color}/>;
             },
         })}
+
         >
             <Tab.Screen name="meals" 
             component={CategoriesScreen} 
             options={{
+                headerMode : 'screen',
                 title : 'meals',
                 tabBarIcon: ({color}) => <Ionicons size={24} color={color} name='ios-restaurant' />,
                 tabBarColor: Colors.primartyColor,
             }}
             />
             <Tab.Screen name="favourites"
-             component={FavouritesScreen}
+             component={FavStack}
              options={{
+                headerMode : 'screen',
                 title : 'favourites',
                 tabBarIcon: ({color}) => <Ionicons size={24} color={color} name='ios-star' />,
                 tabBarColor: Colors.secondaryColor,
