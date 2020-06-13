@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   details: {
     padding: 15,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-around"
   },
   ListItem: {
     marginVertical: 10,
