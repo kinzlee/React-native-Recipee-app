@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 import { NavigationContainer, DrawerActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -25,7 +25,10 @@ const defaultNavigationOption = {
   },
   headerTintColor: Platform.OS === "android" ? "#ffff" : Colors.primartyColor,
   headerTitleStyle: {
-    fontWeight: "bold"
+    fontFamily: "Open-Sans-Bold"
+  },
+  headerBackTitleStyle: {
+    fontFamily: "Open-Sans-Bold"
   }
 };
 
@@ -71,7 +74,13 @@ const MyTabs = () => {
           tabBarIcon: ({ color }) => (
             <Ionicons size={24} color={color} name="ios-restaurant" />
           ),
-          tabBarColor: Colors.primartyColor
+          tabBarColor: Colors.primartyColor,
+          tabBarLabel:
+            Platform.OS === "android" ? (
+              <Text style={{ fontFamily: "Open-Sans-Bold" }}>Meals</Text>
+            ) : (
+              "Meals"
+            )
         }}
       />
       <Tab.Screen
@@ -83,7 +92,13 @@ const MyTabs = () => {
           tabBarIcon: ({ color }) => (
             <Ionicons size={24} color={color} name="ios-star" />
           ),
-          tabBarColor: Colors.secondaryColor
+          tabBarColor: Colors.secondaryColor,
+          tabBarLabel:
+            Platform.OS === "android" ? (
+              <Text style={{ fontFamily: "Open-Sans-Bold" }}>Favourites</Text>
+            ) : (
+              "Favourites"
+            )
         }}
       />
     </Tab.Navigator>
@@ -211,7 +226,7 @@ const MyStack = () => {
 
 const FiltersNav = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={defaultNavigationOption}>
       <Stack.Screen
         name="filters"
         component={FiltersScreen}
@@ -242,7 +257,15 @@ const Drawer = createDrawerNavigator();
 const MyDrawer = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: Colors.secondaryColor,
+          labelStyle: {
+            fontFamily: "Open-Sans-Bold"
+          }
+          // activeBackgroundColor: Colors.primartyColor
+        }}
+      >
         <Drawer.Screen
           name="MainStck"
           component={MyTabs}
