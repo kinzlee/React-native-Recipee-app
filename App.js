@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import RecipeeNavigation from "./navigation/RecipeeNavigation";
 import MyStack from "./navigation/RecipeeNavigation";
-import MyTabs from "./navigation/RecipeeBottomNavigation";
+// import MyTabs from "./navigation/RecipeeBottomNavigation";
 import { useScreens } from "react-native-screens";
 
 const fetchFonts = () => {

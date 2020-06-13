@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Platform } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DrawerActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,6 +16,7 @@ import FiltersScreen from "../screens/FiltersScreen";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { grey } from "color-name";
+// import MyTabs from "./RecipeeBottomNavigation";
 // import MyTabs from "./RecipeeBottomNavigation";
 
 const defaultNavigationOption = {
@@ -33,61 +34,59 @@ const Tab =
     ? createMaterialBottomTabNavigator()
     : createBottomTabNavigator();
 
-MyTabs = () => {
+const MyTabs = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        shifting={true}
-        initialRouteName="meals"
-        activeColor="#fff"
-        inactiveColor="grey"
-        barStyle={{ backgroundColor: Colors.primartyColor }}
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, size }) => {
-            let iconName;
-            let color;
-            const activeTintColor = "#fff";
-            const inactiveTintColor = "grey";
-            if (route.name === "meals") {
-              iconName = focused ? "ios-restaurant" : "ios-restaurant";
-              size = 24;
-              color = focused ? activeTintColor : inactiveTintColor;
-            } else if (route.name === "favourites") {
-              iconName = focused ? "ios-star" : "ios-star";
-              size = 24;
-              color = focused ? activeTintColor : inactiveTintColor;
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
+    <Tab.Navigator
+      shifting={true}
+      initialRouteName="meals"
+      activeColor="#fff"
+      inactiveColor="grey"
+      barStyle={{ backgroundColor: Colors.primartyColor }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, size }) => {
+          let iconName;
+          let color;
+          const activeTintColor = "#fff";
+          const inactiveTintColor = "grey";
+          if (route.name === "meals") {
+            iconName = focused ? "ios-restaurant" : "ios-restaurant";
+            size = 24;
+            color = focused ? activeTintColor : inactiveTintColor;
+          } else if (route.name === "favourites") {
+            iconName = focused ? "ios-star" : "ios-star";
+            size = 24;
+            color = focused ? activeTintColor : inactiveTintColor;
           }
-        })}
-      >
-        <Tab.Screen
-          name="meals"
-          component={MyDrawer}
-          options={{
-            headerMode: "screen",
-            title: "meals",
-            tabBarIcon: ({ color }) => (
-              <Ionicons size={24} color={color} name="ios-restaurant" />
-            ),
-            tabBarColor: Colors.primartyColor
-          }}
-        />
-        <Tab.Screen
-          name="favourites"
-          component={FavStack}
-          options={{
-            headerMode: "screen",
-            title: "favourites",
-            tabBarIcon: ({ color }) => (
-              <Ionicons size={24} color={color} name="ios-star" />
-            ),
-            tabBarColor: Colors.secondaryColor
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        }
+      })}
+    >
+      <Tab.Screen
+        name="meals"
+        component={MyStack}
+        options={{
+          headerMode: "screen",
+          title: "meals",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={24} color={color} name="ios-restaurant" />
+          ),
+          tabBarColor: Colors.primartyColor
+        }}
+      />
+      <Tab.Screen
+        name="favourites"
+        component={FavStack}
+        options={{
+          // headerMode: "screen",
+          title: "favourites",
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={24} color={color} name="ios-star" />
+          ),
+          tabBarColor: Colors.secondaryColor
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
@@ -102,19 +101,43 @@ const FavStack = () => {
       <Stack.Screen
         name="favourites"
         component={FavouritesScreen}
-        options={{
-          title: "favourites"
+        options={({ navigation }) => {
+          return {
+            title: "Filters",
+            headerLeft: ({}) => (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title="Menu"
+                  iconName="ios-menu"
+                  onPress={() => {
+                    navigation.dispatch(DrawerActions.toggleDrawer());
+                  }}
+                />
+              </HeaderButtons>
+            )
+            // headerLeftContainerStyle: (iconName = "ios-menu")
+          };
         }}
-        // options={}
       />
       <Stack.Screen
         name="mealsDetail"
         component={MealsDetailScreen}
-        options={({ route }) => {
+        options={({ route, navigation }) => {
           const { mealId } = route.params;
           const selectedMeal = MEALS.find(meal => meal.id === mealId);
           return {
-            title: selectedMeal.title
+            title: selectedMeal.title,
+            headerLeft: ({}) => (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title="Menu"
+                  iconName="ios-menu"
+                  onPress={() => {
+                    navigation.dispatch(DrawerActions.toggleDrawer());
+                  }}
+                />
+              </HeaderButtons>
+            )
           };
         }}
       />
@@ -131,17 +154,18 @@ const MyStack = () => {
         options={({ navigation }) => {
           return {
             title: "Meal Categories",
-            headerLeft: (
+            headerLeft: ({}) => (
               <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
-                  title="menu"
+                  title="Menu"
                   iconName="ios-menu"
                   onPress={() => {
-                    navigation.toggleDrawer();
+                    navigation.dispatch(DrawerActions.openDrawer());
                   }}
                 />
               </HeaderButtons>
             )
+            // headerLeftContainerStyle: (iconName = "ios-menu")
           };
         }}
       />
@@ -191,8 +215,22 @@ const FiltersNav = () => {
       <Stack.Screen
         name="filters"
         component={FiltersScreen}
-        options={{
-          title: "Filters"
+        options={({ navigation }) => {
+          return {
+            title: "Filters",
+            headerLeft: ({}) => (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title="Menu"
+                  iconName="ios-menu"
+                  onPress={() => {
+                    navigation.dispatch(DrawerActions.toggleDrawer());
+                  }}
+                />
+              </HeaderButtons>
+            )
+            // headerLeftContainerStyle: (iconName = "ios-menu")
+          };
         }}
       />
     </Stack.Navigator>
@@ -203,11 +241,25 @@ const Drawer = createDrawerNavigator();
 
 const MyDrawer = () => {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="MainStck" component={MyStack} />
-      <Drawer.Screen name="filters" component={FiltersNav} />
-    </Drawer.Navigator>
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen
+          name="MainStck"
+          component={MyTabs}
+          options={{
+            drawerLabel: "Meals"
+          }}
+        />
+        <Drawer.Screen
+          name="filters"
+          component={FiltersNav}
+          options={{
+            drawerLabel: "Filters"
+          }}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 };
 
-export default MyTabs;
+export default MyDrawer;
