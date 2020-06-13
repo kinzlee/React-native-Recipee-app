@@ -10,6 +10,14 @@ import {
 import { MEALS } from "../data/dummy-data";
 import CustomText from "../components/CustomText";
 
+const ListItem = ({ children }) => {
+  return (
+    <View style={styles.ListItem}>
+      <CustomText>{children}</CustomText>
+    </View>
+  );
+};
+
 const MealsDetailScreen = ({
   affordability,
   duration,
@@ -28,9 +36,13 @@ const MealsDetailScreen = ({
         <CustomText>{selectedMeal.affordability.toUpperCase()}</CustomText>
       </View>
       <Text style={styles.title}>Ingredients</Text>
-      <Text>List Of Ingredients...</Text>
+      {selectedMeal.ingredients.map(ingredient => (
+        <ListItem key={ingredient}>{ingredient}</ListItem>
+      ))}
       <Text style={styles.title}>Steps</Text>
-      <Text>List Of Steps</Text>
+      {selectedMeal.steps.map(step => (
+        <ListItem key={step}>{step}</ListItem>
+      ))}
     </ScrollView>
   );
 };
@@ -49,6 +61,14 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  ListItem: {
+    marginVertical: 10,
+    marginHorizontal: 20,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    elevation: 1,
+    padding: 10
   }
 });
 
