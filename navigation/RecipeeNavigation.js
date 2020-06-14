@@ -243,7 +243,19 @@ const FiltersNav = () => {
                   }}
                 />
               </HeaderButtons>
+            ),
+            headerRight: ({}) => (
+              <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                  title="Save"
+                  iconName="ios-save"
+                  onPress={() => {
+                    console.log("saved this filter");
+                  }}
+                />
+              </HeaderButtons>
             )
+
             // headerLeftContainerStyle: (iconName = "ios-menu")
           };
         }}
