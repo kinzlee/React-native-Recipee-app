@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Platform, View, Text, StyleSheet, Switch } from "react-native";
 import Colors from "../constants/Colors";
+import { CommonActions } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderButton";
 
 const FilterSwitch = ({ label, state, onChange }) => {
   return (
@@ -17,11 +21,46 @@ const FilterSwitch = ({ label, state, onChange }) => {
   );
 };
 
-const FiltersScreen = () => {
+const FiltersScreen = ({ navigation, route }) => {
+  //   const { navigation } = props;
+
   const [isGlutenFree, setIsGlutenFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegetarian, setIsVegitarian] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
+
+  const SaveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      Vegetarian: isVegetarian,
+      vegan: isVegan
+    };
+    console.log(appliedFilters);
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+
+  useEffect(() => {
+    navigation.dispatch(CommonActions.setParams({ save: SaveFilters }));
+  }, [SaveFilters]);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Save"
+            iconName="ios-save"
+            onPress={() => {
+              {
+                console.log(route.params.save);
+              }
+            }}
+          />
+        </HeaderButtons>
+      )
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Available Filters / Restrictions</Text>

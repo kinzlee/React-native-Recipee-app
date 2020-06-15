@@ -1,6 +1,10 @@
-import * as React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Platform, Text } from "react-native";
-import { NavigationContainer, DrawerActions } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DrawerActions,
+  CommonActions
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,9 +19,17 @@ import FavouritesScreen from "../screens/FavouritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+// import {SaveFilters} from '../screens/FiltersScreen';
+import { SaveFilters } from "../screens/FiltersScreen";
 import { grey } from "color-name";
 // import MyTabs from "./RecipeeBottomNavigation";
 // import MyTabs from "./RecipeeBottomNavigation";
+
+<FiltersScreen
+// hook = {useEffect(() => {
+//   navigation.dispatch(CommonActions.setParams({ save: SaveFilters }));
+// })}
+/>;
 
 const defaultNavigationOption = {
   headerStyle: {
@@ -230,7 +242,16 @@ const FiltersNav = () => {
       <Stack.Screen
         name="filters"
         component={FiltersScreen}
-        options={({ navigation }) => {
+        options={({ navigation, route, save }) => {
+          //   const {navigation} = props;
+          //  appliedFilters = {
+          //     glutenFree: isGlutenFree,
+          //     lactoseFree: isLactoseFree,
+          //     Vegetarian: isVegetarian,
+          //     vegan: isVegan
+          //   };
+          //   console.log(appliedFilters);
+
           return {
             title: "Filters",
             headerLeft: ({}) => (
@@ -243,18 +264,18 @@ const FiltersNav = () => {
                   }}
                 />
               </HeaderButtons>
-            ),
-            headerRight: ({}) => (
-              <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item
-                  title="Save"
-                  iconName="ios-save"
-                  onPress={() => {
-                    console.log("saved this filter");
-                  }}
-                />
-              </HeaderButtons>
             )
+            // headerRight: ({}) => (
+            //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            //     <Item
+            //       title="Save"
+            //       iconName="ios-save"
+            //       onPress={() => {
+            //         route.params.save;
+            //       }}
+            //     />
+            //   </HeaderButtons>
+            // )
 
             // headerLeftContainerStyle: (iconName = "ios-menu")
           };
