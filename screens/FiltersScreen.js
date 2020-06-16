@@ -1,5 +1,12 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { Platform, View, Text, StyleSheet, Switch } from "react-native";
+import {
+  Platform,
+  View,
+  Text,
+  StyleSheet,
+  Switch,
+  TouchableOpacity
+} from "react-native";
 import Colors from "../constants/Colors";
 import { DrawerActions, CommonActions } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -29,15 +36,15 @@ const FiltersScreen = ({ navigation, route }) => {
   const [isVegetarian, setIsVegitarian] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
 
-  // const SaveFilters = useCallback(() => {
-  //   const appliedFilters = {
-  //     glutenFree: isGlutenFree,
-  //     lactoseFree: isLactoseFree,
-  //     Vegetarian: isVegetarian,
-  //     vegan: isVegan
-  //   };
-  //   console.log(appliedFilters);
-  // }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan]);
+  const SaveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      Vegetarian: isVegetarian,
+      vegan: isVegan
+    };
+    console.log(appliedFilters);
+  }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan]);
 
   // useEffect(() => {
   //   navigation.dispatch(CommonActions.setParams({ save: SaveFilters }));
@@ -63,6 +70,12 @@ const FiltersScreen = ({ navigation, route }) => {
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Available Filters / Restrictions</Text>
+      <TouchableOpacity onPress={SaveFilters}>
+        <View>
+          <Ionicons size={24} color={Colors.primartyColor} name="ios-save" />
+          <Text>save</Text>
+        </View>
+      </TouchableOpacity>
       <FilterSwitch
         label={"Gluten-Free"}
         state={isGlutenFree}
