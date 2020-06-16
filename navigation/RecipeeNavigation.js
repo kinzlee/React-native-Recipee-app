@@ -254,17 +254,19 @@ const FiltersNav = () => {
 
           return {
             title: "Filters",
+
             headerLeft: ({}) => (
-              <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item
-                  title="Menu"
-                  iconName="ios-menu"
-                  onPress={() => {
-                    navigation.dispatch(DrawerActions.toggleDrawer());
-                  }}
-                />
-              </HeaderButtons>
-            )
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Menu"
+            iconName="ios-menu"
+            onPress={() => {
+              navigation.dispatch(DrawerActions.toggleDrawer());
+            }}
+          />
+        </HeaderButtons>
+      )
+
             // headerRight: ({}) => (
             //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
             //     <Item
