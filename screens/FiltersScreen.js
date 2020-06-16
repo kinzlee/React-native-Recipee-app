@@ -69,13 +69,15 @@ const FiltersScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.title}>Available Filters / Restrictions</Text>
-      <TouchableOpacity onPress={SaveFilters}>
-        <View>
-          <Ionicons size={24} color={Colors.primartyColor} name="ios-save" />
-          <Text>save</Text>
+      <View style={styles.btnContainer}>
+        <Text style={styles.title}>Available Filters / SortBy </Text>
+        <View style={styles.btnStyle}>
+          <TouchableOpacity onPress={SaveFilters}>
+            <Ionicons size={24} color={Colors.primartyColor} name="ios-save" />
+            <Text style={styles.btnText}>save</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      </View>
       <FilterSwitch
         label={"Gluten-Free"}
         state={isGlutenFree}
@@ -120,6 +122,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "80%",
     marginVertical: 10
+  },
+  btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
+  btnStyle: {
+    padding: 24
+  },
+  btnText: {
+    // textAlign: "center",
+    marginRight: 5
   }
 });
 
