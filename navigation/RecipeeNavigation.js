@@ -152,11 +152,11 @@ const FavStack = () => {
         component={MealsDetailScreen}
         options={({ route, navigation }) => {
           const { headerTitle } = route.params;
-          const { mealId } = route.params;
-          const availableMeals = useSelector(state => state.meals.meals);
-          const selectedMeal = availableMeals.find(
-            header => header.title === headerTitle
-          );
+          // const { mealId } = route.params;
+          // const availableMeals = useSelector(state => state.meals.meals);
+          // const selectedMeal = availableMeals.find(
+          //   header => header.title === headerTitle
+          // );
           return {
             title: headerTitle,
             headerLeft: ({}) => (
@@ -197,7 +197,6 @@ const MyStack = () => {
                 />
               </HeaderButtons>
             )
-            // headerLeftContainerStyle: (iconName = "ios-menu")
           };
         }}
       />
@@ -221,12 +220,7 @@ const MyStack = () => {
         options={({ route }) => {
           const { mealId } = route.params;
           const { headerTitle } = route.params;
-          // const selectedMeal = headerTitle;
-          // const availableMeals = useSelector(state => state.meals.meals);
-          // const selectedMeal = availableMeals.find(
-          //   header => header.id === headerTitle
-          // );
-          // const headerTitle = selectedMeal.title;
+
           return {
             title: headerTitle,
             headerRight: () => (
