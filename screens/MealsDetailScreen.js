@@ -7,7 +7,8 @@ import {
   Button,
   Image
 } from "react-native";
-import { MEALS } from "../data/dummy-data";
+// import { MEALS } from "../data/dummy-data"
+import { useSelector } from "react-redux";
 import CustomText from "../components/CustomText";
 
 const ListItem = ({ children }) => {
@@ -26,7 +27,9 @@ const MealsDetailScreen = ({
   route
 }) => {
   const { mealId } = route.params;
-  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  const availableMeals = useSelector(state => state.meals.meals);
+  const selectedMeal = availableMeals.find(meal => meal.id === mealId);
+
   return (
     <ScrollView>
       <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />

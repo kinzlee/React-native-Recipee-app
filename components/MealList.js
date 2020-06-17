@@ -9,7 +9,8 @@ const MealList = ({ listData, navigation }) => {
         title={itemData.item.title}
         onSelectMeal={() => {
           navigation.navigate("mealsDetail", {
-            mealId: itemData.item.id
+            mealId: itemData.item.id,
+            headerTitle: itemData.item.title
           });
         }}
         duration={itemData.item.duration}

@@ -5,7 +5,16 @@ import { AppLoading } from "expo";
 import RecipeeNavigation from "./navigation/RecipeeNavigation";
 import MyStack from "./navigation/RecipeeNavigation";
 // import MyTabs from "./navigation/RecipeeBottomNavigation";
+import { combineReducers, createStore } from "redux";
+import mealsReducer from "./store/reducers/meals";
+import { Provider } from "react-redux";
 import { useScreens } from "react-native-screens";
+
+const rootReducer = combineReducers({
+  meals: mealsReducer
+});
+
+const store = createStore(rootReducer);
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -28,6 +37,8 @@ export default function App() {
 
   return (
     // <RecipeeNavigation />
-    <MyStack />
+    <Provider store={store}>
+      <MyStack />
+    </Provider>
   );
 }

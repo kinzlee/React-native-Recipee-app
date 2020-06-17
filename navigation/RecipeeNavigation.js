@@ -17,6 +17,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import FavouritesScreen from "../screens/FavouritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
+import { useSelector } from "react-redux";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 // import {SaveFilters} from '../screens/FiltersScreen';
@@ -150,10 +151,14 @@ const FavStack = () => {
         name="mealsDetail"
         component={MealsDetailScreen}
         options={({ route, navigation }) => {
+          const { headerTitle } = route.params;
           const { mealId } = route.params;
-          const selectedMeal = MEALS.find(meal => meal.id === mealId);
+          const availableMeals = useSelector(state => state.meals.meals);
+          const selectedMeal = availableMeals.find(
+            header => header.title === headerTitle
+          );
           return {
-            title: selectedMeal.title,
+            title: headerTitle,
             headerLeft: ({}) => (
               <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
@@ -215,9 +220,15 @@ const MyStack = () => {
         component={MealsDetailScreen}
         options={({ route }) => {
           const { mealId } = route.params;
-          const selectedMeal = MEALS.find(meal => meal.id === mealId);
+          const { headerTitle } = route.params;
+          // const selectedMeal = headerTitle;
+          // const availableMeals = useSelector(state => state.meals.meals);
+          // const selectedMeal = availableMeals.find(
+          //   header => header.id === headerTitle
+          // );
+          // const headerTitle = selectedMeal.title;
           return {
-            title: selectedMeal.title,
+            title: headerTitle,
             headerRight: () => (
               <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
