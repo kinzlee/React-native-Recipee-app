@@ -10,16 +10,16 @@ const initialState = {
 const mealsReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_FAVOURITE:
-      const existingIndex = state.favouriteMeals.findIndex(
-        meal => meal.id === mealId
-      );
+      const existingIndex = state.favouriteMeals.findIndex(meal => {
+        return meal.id === action.mealId;
+      });
 
       if (existingIndex >= 0) {
         const updatedFavMeal = [...state.favouriteMeals];
         updatedFavMeal.splice(existingIndex, 1);
         return { ...state, favouriteMeals: updatedFavMeal };
       } else {
-        meals = state.favouriteMeals.find(meal => mealid === mealId);
+        meals = state.meals.find(meal => meal.id === action.mealId);
         return { ...state, favouriteMeals: state.favouriteMeals.concat(meals) };
       }
 

@@ -17,7 +17,8 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import FavouritesScreen from "../screens/FavouritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
-import { useSelector } from "react-redux";
+import { toggleFavourite } from "../store/actions/meals";
+import { useSelector, useDispatch } from "react-redux";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 // import {SaveFilters} from '../screens/FiltersScreen';
@@ -219,8 +220,9 @@ const MyStack = () => {
         component={MealsDetailScreen}
         options={({ route }) => {
           const { mealId } = route.params;
+          // const { meal.id } = route.params;
           const { headerTitle } = route.params;
-
+          const dispatch = useDispatch();
           return {
             title: headerTitle,
             headerRight: () => (
@@ -229,7 +231,7 @@ const MyStack = () => {
                   title="Favourite"
                   iconName="ios-star"
                   onPress={() => {
-                    console.log("this works correctly");
+                    dispatch(toggleFavourite(mealId));
                   }}
                 />
               </HeaderButtons>
