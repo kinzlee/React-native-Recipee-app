@@ -132,7 +132,7 @@ const FavStack = () => {
         component={FavouritesScreen}
         options={({ navigation }) => {
           return {
-            title: "Filters",
+            title: "Favourites",
             headerLeft: ({}) => (
               <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
