@@ -223,13 +223,21 @@ const MyStack = () => {
           // const { meal.id } = route.params;
           const { headerTitle } = route.params;
           const dispatch = useDispatch();
+
+          // useEffect(() => {
+          //   navigation.setParams({ fav: currentMealFav });
+          // }, [currentMealFav]);
+
+          // const { fav } = route.params;
+          const { currentMealFav } = route.params;
+          // const useFav
           return {
             title: headerTitle,
             headerRight: () => (
               <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
                   title="Favourite"
-                  iconName="ios-star"
+                  iconName={currentMealFav ? "ios-star" : "ios-star-outline"}
                   onPress={() => {
                     dispatch(toggleFavourite(mealId));
                   }}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -10,6 +10,8 @@ import {
 // import { MEALS } from "../data/dummy-data"
 import { useSelector } from "react-redux";
 import CustomText from "../components/CustomText";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderButton";
 
 const ListItem = ({ children }) => {
   return (
@@ -29,6 +31,31 @@ const MealsDetailScreen = ({
   const { mealId } = route.params;
   const availableMeals = useSelector(state => state.meals.meals);
   const selectedMeal = availableMeals.find(meal => meal.id === mealId);
+
+  // const currentMealFav = useSelector(state =>
+  //   state.meal.favouriteMeals.some(meal => meal.id === mealId)
+  // );
+  // const currentMealFav = useSelector(state =>
+  //   state.meal.favouriteMeals.some(meal => meal.id === mealId)
+  // );
+  // const currentMealFav = useSelector(state =>
+  //   state.meal.favouriteMeals.some(meal => meal.id === mealId)
+  // );
+
+  // useEffect(() => {
+  //   navigation.setParams({ fav: currentMealFav });
+  // }, [currentMealFav]);
+
+  // React.useLayoutEffect(() => {
+  //   const sss = route.params.fav;
+  //   navigation.setOptions({
+  //     headerRight: ({}) => (
+  //       <HeaderButtons HeaderButtonComponent={HeaderButton}>
+  //         <Item iconName={sss ? "ios-star" : "ios-star-outline"} />
+  //       </HeaderButtons>
+  //     )
+  //   });
+  // }, [navigation]);
 
   return (
     <ScrollView>
