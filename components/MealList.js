@@ -16,7 +16,7 @@ const MealList = ({ listData, navigation }) => {
           navigation.navigate("mealsDetail", {
             mealId: itemData.item.id,
             headerTitle: itemData.item.title,
-            currentMealFav: isFavourite
+            isFav: isFavourite
           });
         }}
         duration={itemData.item.duration}

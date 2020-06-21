@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   ScrollView,
   View,
@@ -8,10 +8,12 @@ import {
   Image
 } from "react-native";
 // import { MEALS } from "../data/dummy-data"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { CommonActions } from "@react-navigation/native";
 import CustomText from "../components/CustomText";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+import { toggleFavourite } from "../store/actions/meals";
 
 const ListItem = ({ children }) => {
   return (
@@ -28,34 +30,43 @@ const MealsDetailScreen = ({
   navigation,
   route
 }) => {
-  const { mealId } = route.params;
   const availableMeals = useSelector(state => state.meals.meals);
+  const { mealId } = route.params;
+  const mealFav = useSelector(state =>
+    state.meals.favouriteMeals.some(meal => meal.id === mealId)
+  );
+
+  useEffect(() => {
+    navigation.setParams({ isFav: mealFav });
+  }, [mealFav]);
   const selectedMeal = availableMeals.find(meal => meal.id === mealId);
+  const dispatch = useDispatch();
+  const favStore = useCallback(() => {
+    dispatch(toggleFavourite(mealId));
+  }, [dispatch, mealId]);
+  // dispatch();
 
-  // const currentMealFav = useSelector(state =>
-  //   state.meal.favouriteMeals.some(meal => meal.id === mealId)
-  // );
-  // const currentMealFav = useSelector(state =>
-  //   state.meal.favouriteMeals.some(meal => meal.id === mealId)
-  // );
-  // const currentMealFav = useSelector(state =>
-  //   state.meal.favouriteMeals.some(meal => meal.id === mealId)
-  // );
+  useEffect(() => {
+    navigation.setParams({ fav: favStore });
+  }, [favStore]);
 
-  // useEffect(() => {
-  //   navigation.setParams({ fav: currentMealFav });
-  // }, [currentMealFav]);
+  const fava = route.params.fav;
+  const favSwitch = route.params.isFav;
 
-  // React.useLayoutEffect(() => {
-  //   const sss = route.params.fav;
-  //   navigation.setOptions({
-  //     headerRight: ({}) => (
-  //       <HeaderButtons HeaderButtonComponent={HeaderButton}>
-  //         <Item iconName={sss ? "ios-star" : "ios-star-outline"} />
-  //       </HeaderButtons>
-  //     )
-  //   });
-  // }, [navigation]);
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: ({}) => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            iconName={favSwitch ? "ios-star" : "ios-star-outline"}
+            onPress={() => {
+              fava();
+            }}
+          />
+        </HeaderButtons>
+      )
+    });
+  }, [navigation, route]);
 
   return (
     <ScrollView>
