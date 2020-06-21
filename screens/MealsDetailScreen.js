@@ -32,6 +32,7 @@ const MealsDetailScreen = ({
 }) => {
   const availableMeals = useSelector(state => state.meals.meals);
   const { mealId } = route.params;
+  const { isFav } = route.params;
   const mealFav = useSelector(state =>
     state.meals.favouriteMeals.some(meal => meal.id === mealId)
   );
@@ -41,14 +42,10 @@ const MealsDetailScreen = ({
   }, [mealFav]);
   const selectedMeal = availableMeals.find(meal => meal.id === mealId);
   const dispatch = useDispatch();
-  const favStore = useCallback(() => {
+  const favStore = () => {
     dispatch(toggleFavourite(mealId));
-  }, [dispatch, mealId]);
+  };
   // dispatch();
-
-  useEffect(() => {
-    navigation.setParams({ fav: favStore });
-  }, [favStore]);
 
   const fava = route.params.fav;
   const favSwitch = route.params.isFav;
@@ -60,7 +57,7 @@ const MealsDetailScreen = ({
           <Item
             iconName={favSwitch ? "ios-star" : "ios-star-outline"}
             onPress={() => {
-              fava();
+              favStore();
             }}
           />
         </HeaderButtons>
