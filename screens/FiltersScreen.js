@@ -12,6 +12,9 @@ import { DrawerActions, CommonActions } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+import { useDispatch } from "react-redux";
+// import { SaveFilters } from "../store/actions";
+import { setFilters } from "../store/actions/meals";
 
 const FilterSwitch = ({ label, state, onChange }) => {
   return (
@@ -36,46 +39,47 @@ const FiltersScreen = ({ navigation, route }) => {
   const [isVegetarian, setIsVegitarian] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
 
-  const SaveFilters = useCallback(() => {
+  const dispatch = useDispatch();
+
+  const SaveFilters = () => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
       lactoseFree: isLactoseFree,
       Vegetarian: isVegetarian,
       vegan: isVegan
     };
-    console.log(appliedFilters);
-  }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan]);
+    dispatch(setFilters(appliedFilters));
+  };
 
   // useEffect(() => {
-  //   navigation.dispatch(CommonActions.setParams({ save: SaveFilters }));
-  // }, [SaveFilters, navigation]);
+  //   navigation.setParams({ save: SaveFilters });
+  // }, [SaveFilters]);
 
-  // const { save } = route.params;
-
-  // React.useLayoutEffect(() => {
-  //   navigation.setOptions({
-
-  //     headerRight: ({}) => (
-  //       <HeaderButtons HeaderButtonComponent={HeaderButton}>
-  //         <Item
-  //           title="Save"
-  //           iconName="ios-save"
-  //           onPress={console.log(route.params.save)}
-  //         />
-  //       </HeaderButtons>
-  //     )
-  //   });
-  // }, [navigation]);
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: ({}) => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Save"
+            iconName="ios-save"
+            onPress={() => {
+              SaveFilters();
+            }}
+          />
+        </HeaderButtons>
+      )
+    });
+  }, [navigation, SaveFilters]);
 
   return (
     <View style={styles.screen}>
       <View style={styles.btnContainer}>
         <Text style={styles.title}>Available Filters / SortBy </Text>
         <View style={styles.btnStyle}>
-          <TouchableOpacity onPress={SaveFilters}>
+          {/* <TouchableOpacity onPress={SaveFilters}>
             <Ionicons size={24} color={Colors.primartyColor} name="ios-save" />
             <Text style={styles.btnText}>save</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <FilterSwitch
