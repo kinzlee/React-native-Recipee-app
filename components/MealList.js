@@ -32,7 +32,7 @@ const MealList = ({ listData, navigation }) => {
       <FlatList
         data={listData}
         renderItem={renderMealItem}
-        style={{ width: "100%", paddingHorizontal: 10 }}
+        style={{ width: "100%" }}
       />
     </View>
   );
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 15
+    padding: 13
   }
 });
 export default MealList;

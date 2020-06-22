@@ -21,17 +21,8 @@ import { toggleFavourite } from "../store/actions/meals";
 import { useSelector, useDispatch } from "react-redux";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-// import {SaveFilters} from '../screens/FiltersScreen';
-import { SaveFilters } from "../screens/FiltersScreen";
-import { grey } from "color-name";
-// import MyTabs from "./RecipeeBottomNavigation";
-// import MyTabs from "./RecipeeBottomNavigation";
 
-<FiltersScreen
-// hook = {useEffect(() => {
-//   navigation.dispatch(CommonActions.setParams({ save: SaveFilters }));
-// })}
-/>;
+<FiltersScreen />;
 
 const defaultNavigationOption = {
   headerStyle: {
@@ -123,10 +114,7 @@ const Stack = createStackNavigator();
 
 const FavStack = () => {
   return (
-    <Stack.Navigator
-      // headerMode="none"/
-      screenOptions={defaultNavigationOption}
-    >
+    <Stack.Navigator screenOptions={defaultNavigationOption}>
       <Stack.Screen
         name="favourites"
         component={FavouritesScreen}
@@ -144,7 +132,6 @@ const FavStack = () => {
                 />
               </HeaderButtons>
             )
-            // headerLeftContainerStyle: (iconName = "ios-menu")
           };
         }}
       />
@@ -153,24 +140,9 @@ const FavStack = () => {
         component={MealsDetailScreen}
         options={({ route, navigation }) => {
           const { headerTitle } = route.params;
-          // const { mealId } = route.params;
-          // const availableMeals = useSelector(state => state.meals.meals);
-          // const selectedMeal = availableMeals.find(
-          //   header => header.title === headerTitle
-          // );
+
           return {
             title: headerTitle
-            // headerLeft: ({}) => (
-            //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            //     <Item
-            //       title="Menu"
-            //       iconName="ios-menu"
-            //       onPress={() => {
-            //         navigation.dispatch(DrawerActions.toggleDrawer());
-            //       }}
-            //     />
-            //   </HeaderButtons>
-            // )
           };
         }}
       />
@@ -220,18 +192,8 @@ const MyStack = () => {
         component={MealsDetailScreen}
         options={({ route }) => {
           const { mealId } = route.params;
-          // const { meal.id } = route.params;
           const { headerTitle } = route.params;
 
-          // const currentMealFav =
-
-          // useEffect(() => {
-          //   navigation.setParams({ fav: currentMealFav });
-          // }, [currentMealFav]);
-
-          // const { fav } = route.params;
-          // const fava = route.params.currentMealFav
-          // const useFav
           return {
             title: headerTitle,
             headerRight: () => (
@@ -253,15 +215,6 @@ const FiltersNav = () => {
         name="filters"
         component={FiltersScreen}
         options={({ navigation, route, save }) => {
-          //   const {navigation} = props;
-          //  appliedFilters = {
-          //     glutenFree: isGlutenFree,
-          //     lactoseFree: isLactoseFree,
-          //     Vegetarian: isVegetarian,
-          //     vegan: isVegan
-          //   };
-          //   console.log(appliedFilters);
-
           return {
             title: "Filters",
 
@@ -276,20 +229,6 @@ const FiltersNav = () => {
                 />
               </HeaderButtons>
             )
-
-            // headerRight: ({}) => (
-            //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            //     <Item
-            //       title="Save"
-            //       iconName="ios-save"
-            //       onPress={() => {
-            //         route.params.save;
-            //       }}
-            //     />
-            //   </HeaderButtons>
-            // )
-
-            // headerLeftContainerStyle: (iconName = "ios-menu")
           };
         }}
       />
@@ -308,7 +247,6 @@ const MyDrawer = () => {
           labelStyle: {
             fontFamily: "Open-Sans-Bold"
           }
-          // activeBackgroundColor: Colors.primartyColor
         }}
       >
         <Drawer.Screen

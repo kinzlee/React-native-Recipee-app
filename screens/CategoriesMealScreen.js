@@ -8,7 +8,6 @@ import MealList from "../components/MealList";
 
 const CategoriesMealScreen = ({ route, navigation }) => {
   const { categoryId } = route.params;
-  // const selectedCategory = CATEGORIES.find(catgry => catgry.id === categoryId);
 
   const availableMeals = useSelector(state => state.meals.filteredMeals);
 

@@ -7,7 +7,6 @@ import {
   Button,
   Image
 } from "react-native";
-// import { MEALS } from "../data/dummy-data"
 import { useSelector, useDispatch } from "react-redux";
 import { CommonActions } from "@react-navigation/native";
 import CustomText from "../components/CustomText";

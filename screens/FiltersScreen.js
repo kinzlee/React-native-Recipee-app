@@ -1,19 +1,9 @@
-import React, { useCallback, useState, useEffect } from "react";
-import {
-  Platform,
-  View,
-  Text,
-  StyleSheet,
-  Switch,
-  TouchableOpacity
-} from "react-native";
+import React, { useCallback, useState } from "react";
+import { Platform, View, Text, StyleSheet, Switch } from "react-native";
 import Colors from "../constants/Colors";
-import { DrawerActions, CommonActions } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import { useDispatch } from "react-redux";
-// import { SaveFilters } from "../store/actions";
 import { setFilters } from "../store/actions/meals";
 
 const FilterSwitch = ({ label, state, onChange }) => {
@@ -32,8 +22,6 @@ const FilterSwitch = ({ label, state, onChange }) => {
 };
 
 const FiltersScreen = ({ navigation, route }) => {
-  //   const { navigation } = props;
-
   const [isGlutenFree, setIsGlutenFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegetarian, setIsVegitarian] = useState(false);
@@ -41,7 +29,7 @@ const FiltersScreen = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
 
-  const SaveFilters = () => {
+  const SaveFilters = useCallback(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
       lactoseFree: isLactoseFree,
@@ -49,11 +37,7 @@ const FiltersScreen = ({ navigation, route }) => {
       vegan: isVegan
     };
     dispatch(setFilters(appliedFilters));
-  };
-
-  // useEffect(() => {
-  //   navigation.setParams({ save: SaveFilters });
-  // }, [SaveFilters]);
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -75,12 +59,7 @@ const FiltersScreen = ({ navigation, route }) => {
     <View style={styles.screen}>
       <View style={styles.btnContainer}>
         <Text style={styles.title}>Available Filters / SortBy </Text>
-        <View style={styles.btnStyle}>
-          {/* <TouchableOpacity onPress={SaveFilters}>
-            <Ionicons size={24} color={Colors.primartyColor} name="ios-save" />
-            <Text style={styles.btnText}>save</Text>
-          </TouchableOpacity> */}
-        </View>
+        <View style={styles.btnStyle}></View>
       </View>
       <FilterSwitch
         label={"Gluten-Free"}
@@ -102,8 +81,6 @@ const FiltersScreen = ({ navigation, route }) => {
         state={isVegan}
         onChange={newValue => setIsVegan(newValue)}
       />
-
-      {/* <Text style={styles.title}>Filters Screen</Text> */}
     </View>
   );
 };
@@ -112,7 +89,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     alignItems: "center"
-    // justifyContent: "center"
   },
   title: {
     fontFamily: "Open-Sans-Bold",
@@ -135,7 +111,6 @@ const styles = StyleSheet.create({
     padding: 24
   },
   btnText: {
-    // textAlign: "center",
     marginRight: 5
   }
 });
