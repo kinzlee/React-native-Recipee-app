@@ -159,18 +159,18 @@ const FavStack = () => {
           //   header => header.title === headerTitle
           // );
           return {
-            title: headerTitle,
-            headerLeft: ({}) => (
-              <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item
-                  title="Menu"
-                  iconName="ios-menu"
-                  onPress={() => {
-                    navigation.dispatch(DrawerActions.toggleDrawer());
-                  }}
-                />
-              </HeaderButtons>
-            )
+            title: headerTitle
+            // headerLeft: ({}) => (
+            //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            //     <Item
+            //       title="Menu"
+            //       iconName="ios-menu"
+            //       onPress={() => {
+            //         navigation.dispatch(DrawerActions.toggleDrawer());
+            //       }}
+            //     />
+            //   </HeaderButtons>
+            // )
           };
         }}
       />

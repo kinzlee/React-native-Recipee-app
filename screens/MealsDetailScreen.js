@@ -32,7 +32,6 @@ const MealsDetailScreen = ({
 }) => {
   const availableMeals = useSelector(state => state.meals.meals);
   const { mealId } = route.params;
-  const { isFav } = route.params;
   const mealFav = useSelector(state =>
     state.meals.favouriteMeals.some(meal => meal.id === mealId)
   );
@@ -45,9 +44,7 @@ const MealsDetailScreen = ({
   const favStore = () => {
     dispatch(toggleFavourite(mealId));
   };
-  // dispatch();
 
-  const fava = route.params.fav;
   const favSwitch = route.params.isFav;
 
   React.useLayoutEffect(() => {
